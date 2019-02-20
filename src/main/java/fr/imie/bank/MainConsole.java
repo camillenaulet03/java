@@ -9,26 +9,22 @@ import java.time.LocalDate;
 
 public class MainConsole {
 	
-	public static void findAll() {  
-		try {
-			  if(System.getProperty("os.name" ).startsWith("Windows"))
-			    Runtime.getRuntime().exec("cls");
-			  else
-			    Runtime.getRuntime().exec("clear");
-			} catch(Exception excpt) {
-				  for(int i=0;i<100;i++)
-				    System.out.println();
-			} 
+	public static void FindAll(List<Person> personnes) {  
+		int size = personnes.size();
+		for (int i = 0; i<size; i++) {
+			System.out.print(personnes.get(i));
+		}
 	   }
 	
 	public static void main(String[] args){
-
+		
 		List<Person> personnes = null;
 		Person personneCree = null;
 		int newPers = 0;
 		boolean repB = true;
 		boolean restartB = true;
 		boolean repChB = true;
+		boolean continuB = true;
 		int id = 0;
 		String prenom = "";
 		String nom = "";
@@ -38,7 +34,7 @@ public class MainConsole {
 		int ddnA = 0;
 		String email = "";
 		int choix = 0;
-		
+				
 //		LocalDate date = LocalDate.of(2013, 06, 23);
 //		System.out.println(date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 		
@@ -54,103 +50,96 @@ public class MainConsole {
 		personnes.add(personne3);
 		
 		do {
-			System.out.println("1) Lister les personnes");
-	        System.out.println("2) Ajouter une personne");
-	        System.out.println("3) Modifier une personne");
-	        System.out.println("4) Supprimer une personne");
-	        System.out.println("5) Lister les comptes");
-	        System.out.println("6) Ajouter un compte");
-	        System.out.println("7) Modifier un compte");
-	        System.out.println("8) Supprimer un compte");
-	        System.out.println("9) Sortir");
-			System.out.println("Quel catégorie voulez vous choisir ?");
-			String Schoix = sc.nextLine();
-			try{
-				choix = Integer.parseInt(Schoix);
-				repChB = false;
-			}catch(NumberFormatException e){
-				System.out.println("Vous avez fait une erreur de saisi car les caractères ne sont pas de chiffres");
-			}
-		}while(repChB);		
-		
-		switch (choix){
-			case 1: 
-				int size = personnes.size();
-				for (int i = 0; i<size; i++) {
-					System.out.print(personnes.get(i));
+			do {
+				System.out.println("1) Lister les personnes");
+		        System.out.println("2) Ajouter une personne");
+		        System.out.println("3) Modifier une personne");
+		        System.out.println("4) Supprimer une personne");
+		        System.out.println("5) Lister les comptes");
+		        System.out.println("6) Ajouter un compte");
+		        System.out.println("7) Modifier un compte");
+		        System.out.println("8) Supprimer un compte");
+		        System.out.println("9) Sortir");
+				System.out.println("Quel catégorie voulez vous choisir ?");
+				String Schoix = sc.nextLine();
+				try{
+					choix = Integer.parseInt(Schoix);
+					repChB = false;
+				}catch(NumberFormatException e){
+					System.out.println("Vous avez fait une erreur de saisi car les caractères ne sont pas de chiffres");
 				}
-		}
-		
-		do {
-			personneCree = null;
+			}while(repChB);		
 			
-			do{
-				System.out.println("Voulez vous saisir une nouvelle personne ?");
-				String rep = sc.nextLine();	
-				
-				if (rep.equals("oui") || rep.equals("Oui") || rep.equals("yes") || rep.equals("Yes")) {
-					newPers = 1;
-					repB = false;
-				} else if (rep.equals("non") || rep.equals("Non") || rep.equals("no") || rep.equals("No")) {
-					newPers = 0;
-					restartB = false;
-					repB = false;
-				} else {
-					System.out.println("Votre réponse est éronnée");
-				}
-			}while (repB);
-			
-			repB = true;
-			
-			if(newPers == 1){
-				System.out.println("Quel est le prenom de cette nouvelle personne ?");
-				prenom = sc.nextLine();
-				
-				System.out.println("Et quel est son nom ?");
-				nom = sc.nextLine();
-				
-				do {
-					System.out.println("Sa date de naissance ?(jour/mois/année)");
+			switch (choix){
+				case 1: 
+					FindAll(personnes);
+					break;
+				case 2:
+					do {
+						personneCree = null;
+						repB = true;
 					
-					System.out.println("Jour = ");
-					String SddnJ = sc.nextLine();
+						System.out.println("Quel est le prenom de cette nouvelle personne ?");
+						prenom = sc.nextLine();
+						
+						System.out.println("Et quel est son nom ?");
+						nom = sc.nextLine();
+						
+						do {
+							System.out.println("Sa date de naissance ?(jour/mois/année)");
+							
+							System.out.println("Jour = ");
+							String SddnJ = sc.nextLine();
+							
+							System.out.println("Mois = ");
+							String SddnM = sc.nextLine();
+							
+							System.out.println("Année = ");
+							String SddnA = sc.nextLine();
+							
+							try {	
+								ddnJ = Integer.parseInt(SddnJ);
+								ddnM = Integer.parseInt(SddnM);
+								ddnA = Integer.parseInt(SddnA);
+							}catch(NumberFormatException e){
+								System.out.println("Vous avez fait une erreur de saisi car les caractères ne sont pas de chiffres");
+							}
+							try {
+								ddn = LocalDate.of(ddnA, ddnM, ddnJ);
+								repB = false;
+							}catch(DateTimeException e) {
+								System.out.println("Vous avez fait une erreur de saisi car la date n'est pas valide");
+							}	
+						}while(repB);
+						
+						System.out.println("Et pour finir quel est son adresse email ?");
+						email = sc.nextLine();
+						
+						id = personnes.size()+1;				
+						
+						personneCree = new Person(id,prenom,nom,ddn,email);			
+						
+						personnes.add(personneCree);
 					
-					System.out.println("Mois = ");
-					String SddnM = sc.nextLine();
-					
-					System.out.println("Année = ");
-					String SddnA = sc.nextLine();
-					
-					try {	
-						ddnJ = Integer.parseInt(SddnJ);
-						ddnM = Integer.parseInt(SddnM);
-						ddnA = Integer.parseInt(SddnA);
-					}catch(NumberFormatException e){
-						System.out.println("Vous avez fait une erreur de saisi car les caractères ne sont pas de chiffres");
-					}
-					try {
-						ddn = LocalDate.of(ddnA, ddnM, ddnJ);
-						repB = false;
-					}catch(DateTimeException e) {
-						System.out.println("Vous avez fait une erreur de saisi car la date n'est pas valide");
-					}	
-				}while(repB);
-				
-				System.out.println("Et pour finir quel est son adresse email ?");
-				email = sc.nextLine();
-				
-				id = personnes.size()+1;				
-				
-				personneCree = new Person(id,prenom,nom,ddn,email);			
-				
-				personnes.add(personneCree);
-				
-			} else {
-				restartB = false;
+						do{
+							System.out.println("Voulez vous saisir une nouvelle personne ?");
+							String rep = sc.nextLine();	
+							
+							if (rep.equals("oui") || rep.equals("Oui") || rep.equals("yes") || rep.equals("Yes")) {
+								repB = false;
+							} else if (rep.equals("non") || rep.equals("Non") || rep.equals("no") || rep.equals("No")) {
+								restartB = false;
+								repB = false;
+							} else {
+								System.out.println("Votre réponse est éronnée");
+							}
+						}while (repB);
+					}while(restartB);
+					break;
+				case 9 :
+					continuB = false;
+					break;
 			}
-		}while(restartB);
-		
-		System.out.println("Votre base de personnes final est : \n");
-		System.out.print(personnes.toString());
-	}	
+		}while(continuB);
+	}
 }
