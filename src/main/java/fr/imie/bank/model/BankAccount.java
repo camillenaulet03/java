@@ -5,8 +5,9 @@ public class BankAccount {
 	public int id;
 	
 	
-	public BankAccount(Integer number, int id) {
+	public BankAccount(int id, Integer number) {
 		super();
+		this.id = id;
 		this.number = number;
 	}
 
