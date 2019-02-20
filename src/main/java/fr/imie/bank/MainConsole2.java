@@ -53,7 +53,7 @@ public class MainConsole {
 		personnes = new ArrayList<Person>();
 		
 		Person personne1 = new Person(1, "corentin", "Fouquet", LocalDate.of(2013, 06, 23),"corentin.fouquet@outlook.com");
-		Person personne2 = new Person(2, "Clément", "Mouniard", LocalDate.of(2015, 12, 31), "corentin.fouquet@imie.fr");
+		Person personne2 = new Person(2, "ClÃ©ment", "Mouniard", LocalDate.of(2015, 12, 31), "corentin.fouquet@imie.fr");
 		Person personne3 = new Person(3, "corentin", "Fouquet", LocalDate.of(2016, 05, 15), "corentin.fouquet@outlook.com");
 		
 		personnes.add(personne1);
@@ -81,13 +81,13 @@ public class MainConsole {
 		        System.out.println("7) Modifier un compte");
 		        System.out.println("8) Supprimer un compte");
 		        System.out.println("9) Sortir");
-				System.out.println("Quel catégorie voulez vous choisir ?");
+				System.out.println("Quel catÃ©gorie voulez vous choisir ?");
 				String Schoix = sc.nextLine();
 				try{
 					choix = Integer.parseInt(Schoix);
 					repChB = false;
 				}catch(NumberFormatException e){
-					System.out.println("Vous avez fait une erreur de saisi car les caractères ne sont pas de chiffres");
+					System.out.println("Vous avez fait une erreur de saisi car les caractÃ¨res ne sont pas de chiffres");
 				}
 			}while(repChB);		
 			
@@ -107,7 +107,7 @@ public class MainConsole {
 						nom = sc.nextLine();
 						
 						do {
-							System.out.println("Sa date de naissance ?(jour/mois/année)");
+							System.out.println("Sa date de naissance ?(jour/mois/annÃ©e)");
 							
 							System.out.println("Jour = ");
 							String SddnJ = sc.nextLine();
@@ -115,7 +115,7 @@ public class MainConsole {
 							System.out.println("Mois = ");
 							String SddnM = sc.nextLine();
 							
-							System.out.println("Année = ");
+							System.out.println("AnnÃ©e = ");
 							String SddnA = sc.nextLine();
 							
 							try {	
@@ -123,7 +123,7 @@ public class MainConsole {
 								ddnM = Integer.parseInt(SddnM);
 								ddnA = Integer.parseInt(SddnA);
 							}catch(NumberFormatException e){
-								System.out.println("Vous avez fait une erreur de saisi car les caractères ne sont pas de chiffres");
+								System.out.println("Vous avez fait une erreur de saisi car les caractÃ¨res ne sont pas de chiffres");
 							}
 							try {
 								ddn = LocalDate.of(ddnA, ddnM, ddnJ);
@@ -152,7 +152,7 @@ public class MainConsole {
 								restartB = false;
 								repB = false;
 							} else {
-								System.out.println("Votre réponse est éronnée");
+								System.out.println("Votre rÃ©ponse est Ã©ronnÃ©e");
 							}
 						}while (repB);
 					}while(restartB);
@@ -168,7 +168,7 @@ public class MainConsole {
 					
 					
 						if (repC.equals("oui") || repC.equals("Oui") || repC.equals("yes") || repC.equals("Yes")) {
-							System.out.println("Voici le numéro de votre compte : ");
+							System.out.println("Voici le numÃ©ro de votre compte : ");
 							 System.out.println(number);
 							 id = comptes.size()+1;
 							 compteCree = new BankAccount(id,number);			
@@ -178,7 +178,7 @@ public class MainConsole {
 							restartB = false;
 							choixB = false;
 						} else {
-							System.out.println("Votre réponse est éronnée");
+							System.out.println("Votre rÃ©ponse est Ã©ronnÃ©e");
 						}
 						
 				}while(restartB);
@@ -191,3 +191,4 @@ public class MainConsole {
 		}while(continuB);
 	}
 	}
+.
